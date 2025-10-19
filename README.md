@@ -340,11 +340,6 @@
    ```
    <img width="468" height="86" alt="image" src="https://github.com/user-attachments/assets/864dbe26-712b-49f8-9434-dc84c1730a07" />
 
-3. После запуска веб-сервер стал доступен по HTTP через публичный IP-адрес (порт 80).
-   В браузере открыла `http://<Public-IP>` и убедилась, что отображается страница `phpinfo()` — значит, сервер работает.
-
-<img width="468" height="351" alt="image" src="https://github.com/user-attachments/assets/0741ae4e-1e10-4e4a-a108-7a60ba37f667" />
-
 ---
 
 ### 8.2. Сервер базы данных (**db-server-k21**)
@@ -477,14 +472,15 @@ ping -c 4 google.com
 ### 9.5. Подключение с bastion к db-server (приватный IP)
 
 1. В консоли EC2 посмотрела **Private IPv4 address** инстанса **db-server-k21**.
-2. С bastion выполнила подключение к MySQL на БД по приватному IP:
-
+2. С bastion выполнила подключение к **db-server-k21** по приватному IP:
+3. Из **db-server-k21** подключилась к MySql
 ```bash
-mysql -h <DB_PRIVATE_IP> -u root -p
-# ввести пароль: StrongPassword123!
+mysql -h localhost -u root -p
+#Пароль пользователя root
 ```
 
-<img width="468" height="113" alt="image" src="https://github.com/user-attachments/assets/1d5a5100-3316-4bf0-8b09-a77cb593651c" />
+
+<img width="468" height="221" alt="image" src="https://github.com/user-attachments/assets/1983a96b-f5bc-47b9-93de-526dc2a7d84c" />
 
 Успешное подключение подтверждает:
 - Работает маршрут из приватной подсети через **NAT Gateway** для исходящих (если БД тянет обновления/репозитории),
@@ -498,7 +494,8 @@ mysql -h <DB_PRIVATE_IP> -u root -p
 ### 9.6. Выход из сессий
 
 ```bash
-exit  # выйти из MySQL
+# Отключится от MySQL (ctrl + c)
+exit  # db-server-k21
 exit  # выйти с bastion на мой локальный ПК
 ```
 
